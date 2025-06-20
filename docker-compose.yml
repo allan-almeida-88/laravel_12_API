@@ -4,7 +4,10 @@ services:
       context: .
       dockerfile: .docker/Dockerfile
       args:
-        WWWGROUP: 1000
+        WWWUSER: wwwuser
+        WWWGROUP: www-data
+        WWWUID: ${UID}
+        WWWGID: ${GID}
     container_name: web
     volumes:
       - .:/var/www:cached
