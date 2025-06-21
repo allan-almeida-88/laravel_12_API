@@ -30,6 +30,8 @@ COPY . /var/www
 ARG WWWUSER
 ARG WWWGROUP
 
+RUN chown -R ${WWWUSER}:${WWWGROUP} /var/www/storage
+
 RUN mkdir -p /var/www/storage /var/www/bootstrap/cache && \
     chown -R ${WWWUSER}:${WWWGROUP} /var/www && \
     find /var/www -type f -exec chmod 664 {} \; && \
