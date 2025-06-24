@@ -30,7 +30,7 @@ COPY . /var/www
 ARG WWWUSER
 ARG WWWGROUP
 
-RUN chown -R ${WWWUSER}:${WWWGROUP} /var/www/storage
+RUN chown -R ${WWWUSER}:${WWWGROUP} /var/www
 
 RUN mkdir -p /var/www/storage /var/www/bootstrap/cache && \
     chown -R ${WWWUSER}:${WWWGROUP} /var/www && \
