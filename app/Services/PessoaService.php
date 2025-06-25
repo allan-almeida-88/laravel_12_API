@@ -8,14 +8,17 @@ use Illuminate\Support\Facades\Redis;
 class PessoaService {
 
     public function findAll() {
-        return PessoaRepository::findAll();
+        $pessoas = PessoaRepository::findAll();
+        
+        return $pessoas;
     }
 
     public function findById($id) {
         $model = json_decode(Redis::get("pessoa:id_$id"), true);
         if(is_null($model)) {
             $model = PessoaRepository::findById($id);
-            Redis::setex("pessoa:id_$model->id", 60, $model);
+            Redis::hset('pessoas', "id_$model->id", $model);
+            // Redis::expire('pessoas', 60);
         }
 
         return $model;
@@ -34,11 +37,15 @@ class PessoaService {
                 'id.integer'    => 'O campo "ID" dever ser numérico.'
             ]);
         }
+
+        $pessoa = PessoaRepository::update($request->all());
+        Redis::hset('pessoas', "id_$pessoa->id", json_encode($pessoa));
         
-        return PessoaRepository::update($request->all());
+        return $pessoa;
     }
 
     public function delete($id) {
+        Redis::hDel('pessoas', "id_$id");
         return PessoaRepository::delete($id);
     }
 

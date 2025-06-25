@@ -7,7 +7,9 @@ use App\Models\Pessoa;
 class PessoaRepository
 {
     public static function findAll() {
-        return Pessoa::query()->get();
+        return Pessoa::query()
+            ->orderBy('id')
+            ->simplePaginate(10);
     }
 
     public static function findById($id) {
