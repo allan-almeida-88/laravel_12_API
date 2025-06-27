@@ -32,11 +32,11 @@ ARG WWWGROUP
 
 RUN chown -R ${WWWUSER}:${WWWGROUP} /var/www
 
-RUN mkdir -p /var/www/storage /var/www/bootstrap/cache && \
-    chown -R ${WWWUSER}:${WWWGROUP} /var/www && \
-    find /var/www -type f -exec chmod 664 {} \; && \
-    find /var/www -type d -exec chmod 775 {} \; && \
-    chmod -R 775 /var/www/storage /var/www/bootstrap/cache && \
-    chown -R ${WWWUSER}:${WWWGROUP} /var/www/storage /var/www/bootstrap/cache
+# RUN mkdir -p /var/www/storage /var/www/bootstrap/cache && \
+#     chown -R ${WWWUSER}:${WWWGROUP} /var/www && \
+#     find /var/www -type f -exec chmod 664 {} \; && \
+#     find /var/www -type d -exec chmod 775 {} \; && \
+#     chmod -R 775 /var/www/storage /var/www/bootstrap/cache && \
+#     chown -R ${WWWUSER}:${WWWGROUP} /var/www/storage /var/www/bootstrap/cache
 
 USER ${WWWUSER}
